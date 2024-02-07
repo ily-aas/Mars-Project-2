@@ -1,0 +1,29 @@
+﻿@model webComplaintsModel
+
+<form method="post" asp-action="SubmitForm" asp-controller="webComplaints">
+    <div class="form-group">
+        <label asp-for="ComplaintFname">First Name:</label>
+        <input asp-for="ComplaintFname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ComplaintLname">Last Name:</label>
+        <input asp-for="ComplaintLname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ComplaintEmail">Email:</label>
+        <input asp-for="ComplaintEmail" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ComplaintMnumber">Mobile Number:</label>
+        <input asp-for="ComplaintMnumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ComplaintDetails">Complaint Details:</label>
+        <textarea asp-for="ComplaintDetails" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="ComplaintIP">IP Address:</label>
+        <input asp-for="ComplaintIP" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
