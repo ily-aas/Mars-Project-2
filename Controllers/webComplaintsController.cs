@@ -19,13 +19,13 @@ namespace Project_2_Web_App.Controllers
         {
             string apiUrl = "https://localhost:44398/Complaints"; // Adjust the port based on your Project 2 configuration
 
-            string fname = model.ComplaintFname;
-            string lname = model.ComplaintLname;
-            string email = model.ComplaintEmail;
-            string mnumber = model.ComplaintMnumber;
-            string details = model.ComplaintDetails;
-            string ip = model.ComplaintIP;
-            DateTime dateCreated = model.ComplaintDateCreated;
+            string fname = model.webComplaintFname;
+            string lname = model.webComplaintLname;
+            string email = model.webComplaintEmail;
+            string mnumber = model.webComplaintMnumber;
+            string details = model.webComplaintDetails;
+            string ip = model.webComplaintIP;
+            DateTime dateCreated = model.webComplaintDateCreated;
 
             // Create a complaint object with the desired data
             Mars_Project_1.Models.Complaint complaint = new Mars_Project_1.Models.Complaint
@@ -67,7 +67,7 @@ namespace Project_2_Web_App.Controllers
                 }
             }
 
-            return View("ThankYou");
+            return View("../Dashboard");
         }
     }
 }

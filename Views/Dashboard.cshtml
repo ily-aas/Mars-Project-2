@@ -1,0 +1,65 @@
+﻿@model DashboardModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">Dashboard</h1>
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Complaints</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Complaint First Name</th>
+                <th>Complaint Last Name</th>
+                <th>Complaint Email</th>
+                <th>Complaint Mobile Number</th>
+                <th>Complaint Details</th>
+                <th>Complaint Date Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var complaint in Model.ComplaintList)
+            {
+                <tr>
+                    <td>@complaint.webComplaintFname</td>
+                    <td>@complaint.webComplaintLname</td>
+                    <td>@complaint.webComplaintEmail</td>
+                    <td>@complaint.webComplaintMnumber</td>
+                    <td>@complaint.webComplaintDetails</td>
+                    <td>@complaint.webComplaintDateCreated</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

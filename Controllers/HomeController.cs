@@ -23,6 +23,11 @@ namespace Project_2_Web_App.Controllers
             return View();
         }
 
+        public IActionResult LoginTag()
+        {
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

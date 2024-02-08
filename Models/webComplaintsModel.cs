@@ -3,12 +3,12 @@
     public class webComplaintsModel
     {
         public int Id { get; set; }
-        public string ComplaintFname { get; set; }
-        public string ComplaintLname { get; set; }
-        public string ComplaintEmail { get; set; }
-        public string ComplaintMnumber { get; set; }
-        public string ComplaintDetails { get; set; }
-        public string ComplaintIP { get; set; }
-        public DateTime ComplaintDateCreated { get; set; }
+        public string webComplaintFname { get; set; }
+        public string webComplaintLname { get; set; }
+        public string webComplaintEmail { get; set; }
+        public string webComplaintMnumber { get; set; }
+        public string webComplaintDetails { get; set; }
+        public string webComplaintIP { get; set; }
+        public DateTime webComplaintDateCreated { get; set; }
     }
 }
