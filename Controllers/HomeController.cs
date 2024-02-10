@@ -23,9 +23,17 @@ namespace Project_2_Web_App.Controllers
             return View();
         }
 
-        public IActionResult LoginTag()
+        public async Task<IActionResult> LoginTagAsync()
         {
-            return View();
+
+            // Call the asynchronous method to get complaints data
+            List<webComplaintsModel> complaints = await CallApiEndpointAsync();
+
+            // Pass the complaints list to the view
+            return View("../Dashboard", complaints);
+
+        
+
         }
 
 
@@ -34,5 +42,54 @@ namespace Project_2_Web_App.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        static async Task<List<webComplaintsModel>> CallApiEndpointAsync()
+        {
+            string apiUrl = "https://localhost:44398/Complaints";
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Deserialize response to a list of webComplaintsModel objects
+                        List<Mars_Project_1.Models.Complaint> apiComplaints = await response.Content.ReadAsAsync<List<Mars_Project_1.Models.Complaint>>();
+
+                        List<webComplaintsModel> complaints = new List<webComplaintsModel>();
+
+                        foreach (var complaint in apiComplaints)
+                        {
+                            // Convert each API complaint to webComplaintsModel
+                            complaints.Add(new webComplaintsModel
+                            {
+                                Id = complaint.ID,
+                                webComplaintFname = complaint.complaintFname,
+                                webComplaintLname = complaint.complaintLname,
+                                webComplaintEmail = complaint.complaintEmail,
+                                webComplaintMnumber = complaint.complaintMnumber,
+                                webComplaintDetails = complaint.complaintDetails,
+                                webComplaintIP = complaint.complaintIP,
+                                webComplaintDateCreated = complaint.complaintDateCreated
+                            });
+                        }
+
+                        return complaints;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception: {ex.Message}");
+                }
+            }
+
+            return null;
+        }
+
     }
 }

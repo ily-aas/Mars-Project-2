@@ -13,64 +13,18 @@ namespace Project_2_Web_App.Controllers
     public class DashboardController : Controller
     {
 
+        private readonly List<webComplaintsModel> _populatedList;
+
+        // Constructor injection to receive the populated list
+        public DashboardController(List<webComplaintsModel> populatedList)
+        {
+            _populatedList = populatedList;
+        }
+
         public IActionResult Dashboard()
         {
-            var dashObj = new DashboardModel();
-
-            // Call the asynchronous method
-            CallApiEndpointAsync(dashObj);
-
-            // Pass complaints list to the view as the model
-            return View(dashObj);
+            return View("Dashboard", _populatedList);
         }
-
-        static async Task CallApiEndpointAsync(DashboardModel dashObj)
-        {
-            string apiUrl = "https://localhost:44398/Complaints";
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        List<Mars_Project_1.Models.Complaint> complaints = await response.Content.ReadAsAsync<List<Mars_Project_1.Models.Complaint>>();
-
-                        foreach (var complaint in complaints)
-                        {
-
-                            dashObj.ComplaintList.Add(new webComplaintsModel
-                            { 
-                                
-                                webComplaintFname = complaint.complaintFname,
-                                webComplaintLname = complaint.complaintLname,
-                                webComplaintEmail = complaint.complaintEmail,
-                                webComplaintMnumber = complaint.complaintMnumber,
-                                webComplaintDetails = complaint.complaintDetails,
-                                webComplaintIP = complaint.complaintIP,
-                                webComplaintDateCreated = complaint.complaintDateCreated,
-                                
-
-                                });
-                            
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception: {ex.Message}");
-                }
-            }
-
-           
-        }
-
 
     }
 }
